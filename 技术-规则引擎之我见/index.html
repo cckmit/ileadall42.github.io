@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link rel="icon" href="/assets/images/logo.png">
+
+<title>技术 | 规则引擎之我见 | ileadall42</title>
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>技术 规则引擎之我见 | ileadall42</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="技术 规则引擎之我见" />
+<meta name="author" content="evan" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="很久之前就想写一篇关于规则引擎和流程引擎的文章，那个时候觉得规则引擎和流程引擎不过是把代码可视化了罢了。在风控部门呆了也有1年了，也该来讲讲一些心得体会。" />
+<meta property="og:description" content="很久之前就想写一篇关于规则引擎和流程引擎的文章，那个时候觉得规则引擎和流程引擎不过是把代码可视化了罢了。在风控部门呆了也有1年了，也该来讲讲一些心得体会。" />
+<meta property="og:site_name" content="ileadall42" />
+<meta property="og:image" content="/assets/images/post/ruleengine/cover1.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-09-25T00:00:00+00:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="/assets/images/post/ruleengine/cover1.png" />
+<meta property="twitter:title" content="技术 规则引擎之我见" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"evan"},"dateModified":"2021-09-25T00:00:00+00:00","datePublished":"2021-09-25T00:00:00+00:00","description":"很久之前就想写一篇关于规则引擎和流程引擎的文章，那个时候觉得规则引擎和流程引擎不过是把代码可视化了罢了。在风控部门呆了也有1年了，也该来讲讲一些心得体会。","headline":"技术 规则引擎之我见","image":"/assets/images/post/ruleengine/cover1.png","mainEntityOfPage":{"@type":"WebPage","@id":"/%E6%8A%80%E6%9C%AF-%E8%A7%84%E5%88%99%E5%BC%95%E6%93%8E%E4%B9%8B%E6%88%91%E8%A7%81/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/images/logo.png"},"name":"evan"},"url":"/%E6%8A%80%E6%9C%AF-%E8%A7%84%E5%88%99%E5%BC%95%E6%93%8E%E4%B9%8B%E6%88%91%E8%A7%81/"}</script>
+<!-- End Jekyll SEO tag -->
+
+    
+<link href="/assets/css/prism.css" rel="stylesheet">
+
+<link href="/assets/css/theme.css" rel="stylesheet">
+
+
+<script src="/assets/js/jquery.min.js"></script>
+
+
+</head>
+
+
+
+
+<body>
+	<!-- defer loading of font and font awesome -->
+	<noscript id="deferred-styles">
+		<link href="https://fonts.loli.net/css?family=Sen:400,700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/font-awesome/5.4.1/css/all.min.css"  crossorigin="anonymous">
+	</noscript>
+
+<!-- Begin Sidebar Navigation
+================================================== -->
+
+<div class="sidebar">    
+</div>   
+<div class="nav-icon">
+    <div class="hamburger-bar"></div>
+</div>
+<div id="blackover-nav" class="blackover"></div>
+<nav id="menu">
+    <ul>
+        <h3>导航</h3>
+        <li><a href="/">首页</a></li>
+        <li><a href="/about.html">关于我</a></li>
+        <li><a href="/contact.html">联系我</a></li>       
+    </ul>   
+</nav>
+
+<script src="/assets/js/lunr.js"></script>
+
+<style>
+    
+</style>
+
+<div class="wrap-search">
+    <div class="d-flex align-items-center ml-auto">
+        <i class="fas fa-search show-search"></i>
+        <form class="bd-search ml-3" onSubmit="return lunr_search(document.getElementById('lunrsearch').value);">
+            <input type="text" class="form-control bigradius text-small launch-modal-search" id="lunrsearch" name="q" maxlength="255" value="" placeholder="输入查询..."/>
+        </form>
+    </div>
+</div>
+
+<div id="lunrsearchresults">
+    <ul></ul>
+</div>
+
+<script src="/assets/js/lunrsearchengine.js"></script>
+
+
+<!-- End Sidebar Navigation
+================================================== -->
+
+<div class="site-content ">
+
+<div class="container">
+
+    <!-- Site Logo/Name
+    ================================================== -->
+   
+    <a class="navbar-brand" href="/">
+        <img src="/assets/images/logo.png" alt="ileadall42">
+    </a>  
+   
+
+    <!-- Site Tag
+    ================================================== -->
+    
+
+    <!-- Content
+    ================================================== -->
+    <div class="main-content">
+        <div class="entry-header">
+    <!-- Post Title -->
+    <h1 class="posttitle">技术 | 规则引擎之我见</h1>
+    <!-- Author & Date  Box -->
+    
+    
+    <div class="d-flex align-items-center mt-4">
+        <div>
+            
+            <img class="author-thumb" src="/assets/images/icon.png" alt="Evan Donn">
+            
+        </div>            
+        <div>
+        Written by <a target="_blank" class="text-dark" href="/about">Evan Donn</a> on 
+        <span class="post-date"><time class="post-date" datetime="2021-09-25">25 Sep 2021</time></span>           
+        
+        </div>            
+    </div>
+    
+</div>
+
+<!-- Adsense under title if enabled from _config.yml (change your pub id and slot) -->
+
+
+<!-- Featured Image -->
+
+<div class="entry-featured-image">
+    
+    <img class="featured-image " src="/assets/images/post/ruleengine/cover1.png" alt="技术 | 规则引擎之我见">
+    
+</div>
+
+
+<!-- Content -->
+<!-- Post, Page Content
+================================================== -->
+<div class="article-post">
+    <!-- Toc if any -->
+    
+    <!-- End Toc -->
+    <p>很久之前就想写一篇关于规则引擎和流程引擎的文章，那个时候觉得规则引擎和流程引擎不过是把代码可视化了罢了。在风控部门呆了也有1年了，也该来讲讲一些心得体会。</p>
+
+<p><strong>本质：</strong>
+<strong>纯开发写代码-&gt;</strong></p>
+
+<p><strong>原来是代码的一部分，被配置化，开发推 -&gt;</strong></p>
+
+<p><strong>写在软配置中心配置化，变成可视化，带有一定业务语义 （规则引擎）-&gt;</strong></p>
+
+<p><strong>整个大流程配置化（脚本式语言） or 流程上的编排（l1\l2\l3\l4）流程引擎 -&gt;</strong></p>
+
+<p><strong>直接把代码逻辑可视化了，也不墨迹直接用可视化来写代码（逻辑编排，少儿编程）-&gt;</strong></p>
+
+<p><strong>上面的都太难了，直接简单粗暴可视化拖拽实现满足业务，无需理解技术语义（low code 可视化）-&gt;</strong></p>
+
+<p><strong>AI生成，直接告诉AI想要的样子，直接满足业务。</strong></p>
+
+<p><strong>烂尾了！！</strong>
+<!-- more --></p>
+
+<p>语雀的图片导出比较麻烦，详见：
+<a href="https://www.yuque.com/docs/share/9ca774a8-4ad9-444f-8460-a434f9967be8?#">技术 | 规则引擎之我见</a></p>
+
+</div>
+
+<!-- Rating -->
+
+<div class="rating mt-4 mb-4 d-flex align-items-center">
+    <strong class="mr-1">Rating:</strong> <div class="rating-holder">
+<div class="c-rating c-rating--regular" data-rating-value="5">
+  <button>1</button>
+  <button>2</button>
+  <button>3</button>
+  <button>4</button>
+  <button>5</button>
+</div>
+</div>
+</div>
+
+
+<!-- Author Box if enabled from _config.yml -->
+<!-- Author Box -->
+
+
+
+
+<!-- Comments if not disabled with comments: false -->
+<!-- Comments
+================================================== -->
+ 
+<div class="comments">
+    <button class="btn btn-dark show-comments">加载评论</button>         
+    <div id="comments">  
+        <h4 class="mb-4">Comments</h4>                 
+            <section class="disqus">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'ileadall42'; 
+        var disqus_developer = 0;
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = window.location.protocol + '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+     
+    <div class="clearfix"></div>              
+    </div>    
+</div>       
+
+
+<!-- Share -->
+<div class="share">
+    <p>
+        Share
+    </p>
+    <ul>
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://twitter.com/share?url=/%E6%8A%80%E6%9C%AF-%E8%A7%84%E5%88%99%E5%BC%95%E6%93%8E%E4%B9%8B%E6%88%91%E8%A7%81/&text=一些思考。" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                <i class="fab fa-twitter"></i>
+            </a>
+        </li>
+
+    </ul>
+</div>
+
+
+<!-- Related Post -->
+<!-- Related Posts
+================================================== -->
+<div class=" related-posts ">  
+
+    
+    <h2 class="text-center mb-4">更多精选</h2>
+    
+    
+    <div class="d-flex justify-content-center align-items-center">
+    
+    <!-- Categories -->
+    
+    
+    <a class="smoothscroll badge badge-primary text-capitalize" href="/categories#技术">技术</a>                
+    
+
+    <!-- Tags -->  
+    
+    
+
+    </div>
+
+    
+    
+    
+    <div class="blog-grid-container">
+        
+        
+            
+            
+        
+            
+        
+            
+        
+        
+        
+            
+            
+        
+            
+        
+            
+        
+        
+        
+            
+            
+        
+            
+        
+            
+        
+        
+        
+            
+            
+        
+            
+        
+            
+        
+        
+        
+            
+            
+        
+            
+        
+            
+        
+        
+        
+            
+            
+        
+            
+        
+            
+        
+        
+        
+            
+            
+        
+            
+        
+            
+        
+        
+        
+            
+            
+        
+            
+        
+            
+        
+        
+        
+            
+            
+        
+            
+        
+            
+        
+        
+        
+            
+            
+        
+            
+        
+            
+        
+        
+        
+            
+            
+        
+            
+        
+            
+        
+        
+        </div>        
+</div>
+
+<!-- Review with LD-JSON, adapt it for your needs if you like, but make sure you test the generated HTML source code first: 
+https://search.google.com/structured-data/testing-tool/u/0/
+================================================== -->
+
+    <script type="application/ld+json">
+    {
+    "@context": "http://schema.org/",
+    "@type": "Review",
+    "itemReviewed": {
+    "@type": "Thing",
+    "name": "技术 | 规则引擎之我见"
+    },
+    "author": {
+    "@type": "Person",
+    "name": "Evan Donn"
+    },
+    "datePublished": "2021-09-25",
+    "reviewRating": {
+    "@type": "Rating",
+    "ratingValue": "5",
+    "bestRating": "5"
+    }
+    }
+    </script>
+
+    </div>
+
+    
+    <!-- Newsletter
+    ================================================== -->
+    <div class="newsletter text-center">
+        <span class="h4"><img src="/assets/images/logo.png" class="newsletter-logo" alt="ileadall42"> &nbsp; 不要错过 <b>精选文章</b> 赶快订阅！</span>
+        <form action="http://eepurl.com/hasPLz" method="post" name="mc-embedded-subscribe-form" class="wj-contact-form validate" target="_blank" novalidate>
+            <div class="mc-field-group d-inline-flex">
+            <input type="email" placeholder="你的邮箱" name="EMAIL" class="required email" id="mce-EMAIL" autocomplete="on" required>
+            <input type="submit" value="订阅" name="subscribe" class="heart">
+            </div>
+        </form>
+    </div>
+    
+    
+</div>
+
+<!-- Begin Footer
+================================================== -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-12 text-center text-lg-left">
+                Copyright © 2022 ileadall42 
+            </div>
+            <div class="col-md-6 col-sm-12 text-center text-lg-right">    
+                <a target="_blank" href="https://www.wowthemes.net/memoirs-free-jekyll-theme/">Memoirs Jekyll Theme</a> by WowThemes.net
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- End Footer
+================================================== -->
+
+</div> <!-- /.site-content -->
+
+<!-- Scripts (if you need bootstrap.js, please add it yourself. I didn't use it for performance reasons, it was not needed in this theme)
+================================================== -->
+
+<script src="/assets/js/prism.js"></script>
+
+<script src="/assets/js/theme.js"></script>
+
+
+
+
+<script id="dsq-count-scr" src="//ileadall42.disqus.com/count.js"></script>
+
+
+</body>
+</html>
